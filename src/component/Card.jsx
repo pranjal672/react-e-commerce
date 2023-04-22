@@ -17,19 +17,19 @@ const Card = ({ item }) => {
                 <p>{item.price} $</p>
                 <p>
                     <span>
-                        {count > 1 ? <FaStar /> : count > 0.5 ? <FaStarHalfAlt /> : <FaRegStar />}
+                        {count > 1 ? <FaStar className="gold" /> : count > 0.5 ? <FaStarHalfAlt className="gold" /> : <FaRegStar />}
                     </span>
                     <span>
-                        {count > 2 ? <FaStar /> : count > 1.5 ? <FaStarHalfAlt /> : <FaRegStar />}
+                        {count > 2 ? <FaStar className="gold" /> : count > 1.5 ? <FaStarHalfAlt className="gold" /> : <FaRegStar />}
                     </span>
                     <span>
-                        {count > 3 ? <FaStar /> : count > 2.5 ? <FaStarHalfAlt /> : <FaRegStar />}
+                        {count > 3 ? <FaStar className="gold" /> : count > 2.5 ? <FaStarHalfAlt className="gold" /> : <FaRegStar />}
                     </span>
                     <span>
-                        {count > 4 ? <FaStar /> : count > 3.5 ? <FaStarHalfAlt /> : <FaRegStar />}
+                        {count > 4 ? <FaStar className="gold" /> : count > 3.5 ? <FaStarHalfAlt className="gold" /> : <FaRegStar />}
                     </span>
                     <span>
-                        {count === 5 ? <FaStar /> : count > 4.5 ? <FaStarHalfAlt /> : <FaRegStar />}
+                        {count === 5 ? <FaStar className="gold" /> : count > 4.5 ? <FaStarHalfAlt className="gold" /> : <FaRegStar />}
                     </span>
                 </p>
             </div>

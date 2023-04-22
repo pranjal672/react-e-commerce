@@ -1,9 +1,9 @@
 
 const Login = () => {
     return (
-        <div className="login">
+        <main>
             <p>Login</p>
-        </div>
+        </main>
     )
 }
 

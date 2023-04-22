@@ -1,0 +1,46 @@
+.flex {
+  display: flex;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.cutoff-text {
+  padding: 0;
+  --max-lines: 1;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--max-lines);
+}
+
+.btn > button {
+  width: fit-content;
+  padding: 1em;
+  outline: 1px solid black;
+  border-radius: 0.6rem;
+  transition: all 300ms ease-in-out;
+  font-weight: bold;
+  background-color: white;
+}
+
+.btn > button:hover {
+  outline: 1px solid black;
+  background-color: black;
+  color: white;
+  transform: scale(1.1);
+}
+
+#btn-active {
+  background-color: black;
+  color: white;
+}
+
+.gold {
+  color: gold;
+}

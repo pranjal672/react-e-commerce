@@ -1,9 +1,9 @@
 
 const Register = () => {
     return (
-        <div className="register">
+        <main>
             <p>Register</p>
-        </div>
+        </main>
     )
 }
 

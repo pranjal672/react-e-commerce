@@ -7,7 +7,7 @@ import Layout from "./containers/Layout"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Cart from "./pages/Cart"
-import Products from "./pages/Products"
+import Product from "./pages/Product"
 import { CartProvider } from "./context/CartContext"
 
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />
       <Route path='cart' element={<Cart />} />
-      <Route path='products/:id' element={<Products />} />
+      <Route path='products/:id' element={<Product />} />
     </Route>
   )
 )

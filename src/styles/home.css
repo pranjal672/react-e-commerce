@@ -1,0 +1,143 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  place-content: center;
+}
+
+.filter-btn,
+.close-filter {
+  display: none;
+}
+
+.filter-header {
+  padding-bottom: 1rem;
+}
+
+.category-type {
+  font-size: 1rem;
+  padding-bottom: 1rem;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.filters li {
+  padding: 0.4rem 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content h2 {
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.products {
+  width: 100%;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  grid-gap: 1rem;
+}
+
+.card {
+  color: gray;
+  box-shadow: 0px 0px 20px #ddd;
+  padding: 1rem;
+}
+
+.card a {
+  font-family: "Poppins", sans-serif;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.pic {
+  padding: 1rem;
+  height: 14rem;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pic img {
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.card-content {
+  font-weight: bold;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content > * {
+  padding: 1rem 0;
+}
+
+.card-content h3 {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    display: flex;
+  }
+
+  .hero aside {
+    z-index: 1000;
+    position: fixed;
+    inset: 0 20% 0 0;
+    background-color: black;
+    padding-left: 1rem;
+    color: white;
+    padding-top: 1.2rem;
+  }
+
+  .sidebar-hide {
+    display: none;
+  }
+
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 3rem;
+  }
+
+  .close-filter {
+    display: block;
+    background-color: inherit;
+    color: white;
+    margin-right: 1rem;
+    width: 1.5rem;
+    aspect-ratio: 1;
+  }
+
+  .close-filter svg {
+    height: 100%;
+    width: 100%;
+  }
+
+  .filter-btn {
+    background-color: white;
+    display: block;
+    position: fixed;
+    top: 5.8rem;
+    left: 1rem;
+    width: 2rem;
+    aspect-ratio: 1;
+  }
+}

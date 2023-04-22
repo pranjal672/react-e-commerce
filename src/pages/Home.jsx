@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react"
 import Card from "../component/Card"
 import Sidebar from "../component/Sidebar"
 import FilterContext from "../context/FilterContext"
-import { FaFilter } from "react-icons/fa"
 
 
 const Home = () => {
@@ -26,9 +25,6 @@ const Home = () => {
         <main>
             <div className="container">
                 <section className="hero">
-                    <button className="filter-btn">
-                        <FaFilter />
-                    </button>
                     <Sidebar />
                     <section className="content">
                         <h2>All Products</h2>
