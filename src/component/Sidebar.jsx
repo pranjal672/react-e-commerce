@@ -42,8 +42,7 @@ const Sidebar = () => {
             <button onClick={() => setDisplay(prev => !prev)} className="filter-btn">
                 <FaFilter />
             </button>
-
-            <aside className={display ? "show" : "sidebar-hide"}>
+            <aside data-visible={display ? "true" : "false"} className="sidebar">
                 <div className="filter-header">
                     <h2>Filter by</h2>
                     <button onClick={() => setDisplay(prev => !prev)} className="close-filter">
@@ -54,12 +53,17 @@ const Sidebar = () => {
                     <h3 className="category-type">Category</h3>
                     <ul className="filters">
                         {filters.map((filter) => (
-                            <li className="btn" key={++id}>
-                                <button id={filterList.includes(filter) ? "btn-active" : ""} onClick={() => createFilterList(filter)}>{filter}</button>
+                            <li key={++id}>
+                                <button className={filterList.includes(filter) ? "btn btn-active" : "btn"} onClick={() => createFilterList(filter)}>{filter}</button>
                             </li>
                         ))}
                     </ul>
                 </section>
+                <div>
+                    <button onClick={() => setDisplay(prev => !prev)} className="btn btn-active applybtn">
+                        Apply
+                    </button>
+                </div>
             </aside>
         </>
     )

@@ -24,7 +24,7 @@ const Products = () => {
             <div className="container">
                 <section className="product">
                     <aside>
-                        <img src={product?.image} alt="" />
+                        <img src={product?.image} alt="product_img" />
                     </aside>
                     <article>
                         <div className="product-details">
@@ -33,8 +33,8 @@ const Products = () => {
                             <p>{product?.description}</p>
                             <div className="btn-container">
                                 <p>{product?.price}$</p>
-                                <p className="btn">
-                                    <button>Add to cart</button>
+                                <p>
+                                    <button className="btn">Add to cart</button>
                                 </p>
                             </div>
                         </div>

@@ -12,8 +12,18 @@ nav a {
 }
 
 .nav-logo {
+  color: white;
+  display: flex;
+  gap: 1rem;
+  min-width: fit-content;
+  /* aspect-ratio: 1 / 1; */
   padding-right: 1rem;
   font-size: 1.5rem;
+}
+
+.logo {
+  height: 100%;
+  width: 100%;
 }
 
 .nav-btn {
@@ -68,7 +78,7 @@ nav a {
 }
 
 @media (max-width: 768px) {
-  .nav-logo {
+  .logo-text {
     display: none;
   }
 
@@ -77,17 +87,23 @@ nav a {
   }
 
   .nav-mobile {
-    z-index: 2000;
+    z-index: 1;
     font-size: 1rem;
     padding: 0;
-    background-color: black;
+    background-color: hsl(0, 0%, 0%);
     position: fixed;
-    inset: 0 0 0 20%;
+    inset: 0 0 0 30%;
     display: flex;
     gap: 3rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transform: translateX(100%);
+    transition: transform 350ms ease-in-out;
+  }
+
+  .nav-mobile[data-visible="true"] {
+    transform: translateX(0%);
   }
 
   .nav-btn {
@@ -95,7 +111,7 @@ nav a {
     color: white;
     display: block;
     position: fixed;
-    top: 1.5rem;
+    top: 1.7rem;
     right: 1rem;
     width: 1.5rem;
     aspect-ratio: 1;

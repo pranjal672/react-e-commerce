@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import Search from "./Search"
 import CartContext from "../context/CartContext"
 import { useContext, useState } from "react"
-import { FaShoppingCart, FaAlignJustify, FaMixer } from "react-icons/fa"
+import { FaShoppingCart, FaAlignJustify, FaMixer, FaOpencart } from "react-icons/fa"
 
 const Navbar = () => {
     const [display, setDisplay] = useState(false)
@@ -12,12 +12,12 @@ const Navbar = () => {
         <header>
             <div className="container">
                 <nav>
-                    <Link to="/" className="nav-logo">ps ecom</Link>
+                    <Link to="/" className="nav-logo"><FaOpencart className="logo" /><span className="logo-text">shop</span></Link>
                     <Search />
                     <button onClick={() => setDisplay(prev => !prev)} className="nav-btn">
                         {!display ? <FaAlignJustify /> : <FaMixer />}
                     </button>
-                    <ul className={display ? "nav-mobile" : "hide"}>
+                    <ul data-visible={display ? "true" : "false"} className="nav-mobile">
                         <li>
                             <Link to="/login">Login</Link>
                         </li>

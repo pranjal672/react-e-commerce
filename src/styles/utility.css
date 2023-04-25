@@ -19,7 +19,7 @@
   -webkit-line-clamp: var(--max-lines);
 }
 
-.btn > button {
+.btn {
   width: fit-content;
   padding: 1em;
   outline: 1px solid black;
@@ -29,14 +29,15 @@
   background-color: white;
 }
 
-.btn > button:hover {
+.btn:hover,
+.btn:active {
   outline: 1px solid black;
   background-color: black;
   color: white;
   transform: scale(1.1);
 }
 
-#btn-active {
+.btn-active {
   background-color: black;
   color: white;
 }

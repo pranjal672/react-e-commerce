@@ -49,6 +49,31 @@
 }
 
 .btn-container p {
-  font-size: 1.2rem;
+  font-size: 1.2em;
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .product {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10rem;
+  }
+
+  .product-details {
+    align-items: flex-start;
+  }
+
+  .product-details h1 {
+    font-size: 1.5rem;
+  }
+
+  .product-details > p {
+    font-size: 0.9rem;
+    color: gray;
+  }
+  .btn-container p {
+    font-size: 1em;
+    font-weight: bold;
+  }
 }
