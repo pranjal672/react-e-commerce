@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useParams } from "react-router-dom"
+import CartContext from "../context/CartContext"
+import { toast } from "react-toastify"
 
 const Products = () => {
+    const { cart, setCart } = useContext(CartContext)
     const [product, setProduct] = useState({})
     const productId = useParams()
 
@@ -19,6 +22,31 @@ const Products = () => {
         getProduct()
     }, [])
 
+    const addToCart = (product) => {
+        const cartDetail = {
+            cartId: product.id,
+            cartImage: product.image,
+            cartPrice: product.price,
+            cartTitle: product.title,
+            cartQty: 1
+        }
+        if (cart.length > 0 && cart.some((item) => item.cartId === product.id)) {
+            toast.error('Product already in Cart!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } else {
+            setCart([...cart, cartDetail])
+            // TODO: enter into supabase database
+        }
+    }
+
     return (
         <main>
             <div className="container">
@@ -34,7 +62,7 @@ const Products = () => {
                             <div className="btn-container">
                                 <p>{product?.price}$</p>
                                 <p>
-                                    <button className="btn">Add to cart</button>
+                                    <button onClick={() => addToCart(product)} className="btn">Add to cart</button>
                                 </p>
                             </div>
                         </div>

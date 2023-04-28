@@ -1,29 +1,22 @@
 nav {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 nav a {
   font-family: "Poppins", sans-serif;
-  color: gray;
+  color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
 .nav-logo {
-  color: white;
   display: flex;
   gap: 1rem;
-  min-width: fit-content;
-  /* aspect-ratio: 1 / 1; */
   padding-right: 1rem;
   font-size: 1.5rem;
-}
-
-.logo {
-  height: 100%;
-  width: 100%;
 }
 
 .nav-btn {
@@ -36,28 +29,25 @@ nav a {
 
 .nav-desktop {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 3rem;
+  gap: 2rem;
   padding-left: 1rem;
   font-size: 1rem;
 }
 
 .nav-search {
-  width: 100%;
+  min-width: 50%;
   padding: 0 1rem;
-  flex: 1;
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 
 .nav-search input {
-  width: 70%;
+  width: 90%;
   padding: 0.7rem;
 }
 
 .nav-search button {
+  width: 10%;
   background-color: inherit;
   color: gray;
   font-size: 1rem;
@@ -65,21 +55,27 @@ nav a {
 
 .nav-cart-container {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 
-.nav-cart-txt {
-  padding: 0.2rem;
-}
-
 .nav-cart-num {
-  color: white;
-  padding-left: 0.5rem;
+  text-align: center;
+  width: 1.5rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  color: black;
+  background-color: white;
 }
 
 @media (max-width: 768px) {
   .logo-text {
     display: none;
+  }
+
+  nav {
+    justify-content: flex-start;
   }
 
   .nav-desktop {
@@ -92,7 +88,7 @@ nav a {
     padding: 0;
     background-color: hsl(0, 0%, 0%);
     position: fixed;
-    inset: 0 0 0 30%;
+    inset: 0 0 0 0;
     display: flex;
     gap: 3rem;
     flex-direction: column;
@@ -111,11 +107,11 @@ nav a {
     color: white;
     display: block;
     position: fixed;
-    top: 1.7rem;
-    right: 1rem;
+    top: 1.55rem;
+    right: 1.2rem;
     width: 1.5rem;
     aspect-ratio: 1;
-    z-index: 9999;
+    z-index: 2;
   }
 
   .nav-btn svg {
@@ -124,6 +120,10 @@ nav a {
   }
 
   .nav-search {
-    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .nav-cart-txt {
+    display: none;
   }
 }

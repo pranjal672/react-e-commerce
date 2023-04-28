@@ -1,5 +1,5 @@
-import Home from "./pages/Home"
-import { FilterProvider } from "./context/FilterContext"
+import Home from "./pages/Home";
+import { FilterProvider } from "./context/FilterContext";
 
 function App() {
 

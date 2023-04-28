@@ -9,6 +9,9 @@ import Register from "./pages/Register"
 import Cart from "./pages/Cart"
 import Product from "./pages/Product"
 import { CartProvider } from "./context/CartContext"
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const router = createBrowserRouter(
@@ -28,5 +31,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <CartProvider>
       <RouterProvider router={router} />
     </CartProvider>
+    <ToastContainer />
   </React.StrictMode>
 )

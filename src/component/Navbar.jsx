@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom"
 import Search from "./Search"
 import CartContext from "../context/CartContext"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { FaShoppingCart, FaAlignJustify, FaMixer, FaOpencart } from "react-icons/fa"
 
 const Navbar = () => {
     const [display, setDisplay] = useState(false)
+    const [cartTotal, setCartTotal] = useState(0)
     const { cart } = useContext(CartContext)
+
+    useEffect(() => {
+        const cartQty = cart.reduce((acc, cur) => acc + cur.cartQty, 0)
+        setCartTotal(cartQty)
+    }, [cart])
 
     return (
         <header>
@@ -21,18 +27,16 @@ const Navbar = () => {
                         <li>
                             <Link to="/login">Login</Link>
                         </li>
-                        <li className="nav-cart-container">
-                            <FaShoppingCart />
-                            <Link to="/cart"><span className="nav-cart-txt">Cart</span><span className="nav-cart-num">{cart.length}</span></Link>
+                        <li>
+                            <Link className="nav-cart-container" to="/cart"><FaShoppingCart /><span className="nav-cart-txt">cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
                         </li>
                     </ul>
                     <ul className="nav-desktop">
                         <li>
                             <Link to="/login">Login</Link>
                         </li>
-                        <li className="nav-cart-container">
-                            <FaShoppingCart />
-                            <Link to="/cart"><span className="nav-cart-txt">Cart</span><span className="nav-cart-num">{cart.length}</span></Link>
+                        <li>
+                            <Link className="nav-cart-container" to="/cart"><FaShoppingCart /><span className="nav-cart-txt">cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
                         </li>
                     </ul>
                 </nav>
