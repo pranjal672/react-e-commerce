@@ -30,7 +30,7 @@
   outline: 1px solid black;
   background-color: black;
   color: white;
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
 }
 
 .btn-active {
@@ -40,4 +40,12 @@
 
 .gold {
   color: gold;
+}
+
+.mb {
+  margin-bottom: 2rem;
+}
+
+.mt {
+  margin-top: 2rem;
 }

@@ -10,8 +10,8 @@ const Navbar = () => {
     const { cart } = useContext(CartContext)
 
     useEffect(() => {
-        const cartQty = cart.reduce((acc, cur) => acc + cur.cartQty, 0)
-        setCartTotal(cartQty)
+        const qty = cart.reduce((acc, cur) => acc + cur.qty, 0)
+        setCartTotal(qty)
     }, [cart])
 
     return (

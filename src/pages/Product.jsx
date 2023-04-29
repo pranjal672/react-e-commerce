@@ -24,13 +24,13 @@ const Products = () => {
 
     const addToCart = (product) => {
         const cartDetail = {
-            cartId: product.id,
-            cartImage: product.image,
-            cartPrice: product.price,
-            cartTitle: product.title,
-            cartQty: 1
+            id: product.id,
+            img: product.image,
+            price: product.price,
+            title: product.title,
+            qty: 1
         }
-        if (cart.length > 0 && cart.some((item) => item.cartId === product.id)) {
+        if (cart.length > 0 && cart.some((item) => item.id === product.id)) {
             toast.error('Product already in Cart!', {
                 position: "top-right",
                 autoClose: 5000,
