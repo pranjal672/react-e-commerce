@@ -20,6 +20,8 @@ const Search = () => {
         getProducts()
     }, [])
 
+    const filteredProduct = products?.filter(product => product.title.toLowerCase().includes(s.toLowerCase()))
+
     return (
         <main>
             <div className="container">
@@ -27,7 +29,9 @@ const Search = () => {
                     <h1>Search Results</h1>
                     <div className="result-container">
                         {
-                            products?.filter(product => product.title.toLowerCase().includes(s.toLowerCase())).map(product => <Card item={product} key={product.id} />)
+                            filteredProduct.length > 0
+                                ? filteredProduct.map(product => <Card item={product} key={product.id} />)
+                                : <p>No product matches the search!</p>
                         }
                     </div>
                 </section>

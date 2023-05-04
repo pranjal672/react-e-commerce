@@ -23,17 +23,7 @@ const ScrollToTop = () => {
     return (
         <>
             {scrollToTopButton && (
-                <button onClick={scrollUp} style={{
-                    position: 'fixed',
-                    bottom: "50px",
-                    right: "20px",
-                    fontSize: "50px",
-                    height: "50px",
-                    width: "50px",
-                    backgroundColor: "black",
-                    color: "white",
-                    boxShadow: "0px 1px 5px blue"
-                }}>^</button>
+                <button onClick={scrollUp} className="scrolltotop">^</button>
             )}
         </>
     )

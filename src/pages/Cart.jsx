@@ -8,7 +8,7 @@ const Cart = () => {
     const [totalPrice, setTotalPrice] = useState(0)
 
     useEffect(() => {
-        const subtotal = cart?.reduce((acc, cur) => acc + cur.price, 0)
+        const subtotal = cart?.reduce((acc, cur) => acc + Number(cur.price) * Number(cur.qty), 0)
         setTotalPrice(subtotal)
     }, [cart])
 
@@ -20,6 +20,38 @@ const Cart = () => {
     const deleteWishItem = (id) => {
         const filterCart = wishList?.filter(cartItem => cartItem.id !== id)
         setWishList(filterCart)
+    }
+
+    const reduceQty = (id) => {
+        const cartProduct = cart?.filter(cartItem => cartItem.id === id)[0]
+        if (cartProduct.qty > 1 && cartProduct.qty <= 10) {
+            cartProduct.qty--
+            const newCart = [...cart]
+            setCart(newCart)
+        } else {
+            const filterCart = cart?.filter(cartItem => cartItem.id !== id)
+            setCart(filterCart)
+        }
+    }
+
+    const addQty = (id) => {
+        const cartProduct = cart?.filter(cartItem => cartItem.id === id)[0]
+        if (cartProduct.qty >= 1 && cartProduct.qty < 10) {
+            cartProduct.qty++;
+            const newCart = [...cart]
+            setCart(newCart)
+        } else {
+            toast.error('Limit reached for this product!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
     }
 
     const addToWishList = (id) => {
@@ -69,7 +101,7 @@ const Cart = () => {
                     <div className="cart-list">
                         <h1>Shoping Cart</h1>
                         {cart.length > 0
-                            ? <ItemList items={cart} deleteItem={deleteCartItem} moveList={addToWishList} isCart />
+                            ? <ItemList items={cart} deleteItem={deleteCartItem} moveList={addToWishList} isCart reduce={reduceQty} add={addQty} />
                             : <p>Cart Empty!</p>
                         }
                     </div>

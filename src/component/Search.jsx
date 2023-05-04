@@ -24,27 +24,28 @@ const Search = () => {
     const searchProduct = (e) => {
         e.preventDefault()
         navigateSearch("/search", { s: searchText })
+        setSearchText("")
     }
 
     return (
         <div className="nav-search-container">
-            <form onSubmit={searchProduct} className="nav-search">
+            <form className="nav-search">
                 <input value={searchText} onChange={(e) => setSearchText(e.target.value)} type="text" placeholder="Search for products..." />
-                <button type="submit">
+                <button onClick={searchProduct}>
                     <FaSearch />
                 </button>
+                <div className="search-container">
+                    {
+                        products?.filter((product) => {
+                            return searchText && product.title.toLowerCase().includes(searchText.toLowerCase())
+                        }).slice(0, 10).map((product) =>
+                            <Link onClick={() => setSearchText("")} to={`/products/${product.id}`} key={product.id}>
+                                {product.title}
+                            </Link>)
+                    }
+                </div>
             </form>
-            <div className="search-container">
-                {
-                    products?.filter((product) => {
-                        return searchText && product.title.toLowerCase().includes(searchText.toLowerCase())
-                    }).slice(0, 10).map((product) =>
-                        <Link to={`products/${product.id}`} key={product.id}>
-                            {product.title}
-                        </Link>)
-                }
-            </div>
-        </div>
+        </div >
     )
 }
 

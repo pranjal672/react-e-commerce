@@ -18,9 +18,8 @@ const Products = () => {
                 console.log(err)
             }
         }
-
         getProduct()
-    }, [])
+    }, [productId])
 
     const addToCart = (product) => {
         const cartDetail = {
