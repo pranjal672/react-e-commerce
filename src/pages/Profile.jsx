@@ -1,13 +1,11 @@
-import Auth from "../component/Auth"
-
-const Login = () => {
+const Profile = () => {
     return (
         <main>
             <div className="container">
-                <Auth />
+                Profile
             </div>
         </main>
     )
 }
 
-export default Login
+export default Profile

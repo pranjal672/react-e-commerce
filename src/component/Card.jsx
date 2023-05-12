@@ -3,7 +3,8 @@ import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa"
 
 const Card = ({ item }) => {
 
-    const count = item?.rating?.rate
+    // const count = item?.rating?.rate
+    const count = item.reviewRating
 
     return (
         <div className="card">
@@ -14,7 +15,7 @@ const Card = ({ item }) => {
             </Link>
             <div className="card-content">
                 <Link to={`/products/${item.id}`}><h3 className="cutoff-text">{item.title}</h3></Link>
-                <p>{item.price} $</p>
+                <p><span>&#8377;</span>{item.price}</p>
                 <p>
                     <span>
                         {count > 1 ? <FaStar className="gold" /> : count > 0.5 ? <FaStarHalfAlt className="gold" /> : <FaRegStar />}
@@ -31,6 +32,7 @@ const Card = ({ item }) => {
                     <span>
                         {count === 5 ? <FaStar className="gold" /> : count > 4.5 ? <FaStarHalfAlt className="gold" /> : <FaRegStar />}
                     </span>
+                    <span>{`(${item.reviewCount})`}</span>
                 </p>
             </div>
         </div>

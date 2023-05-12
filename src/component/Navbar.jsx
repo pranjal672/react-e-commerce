@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom"
 import Search from "./Search"
 import CartContext from "../context/CartContext"
+import SessionContext from "../context/SessionContext"
 import { useContext, useEffect, useState } from "react"
 import { FaShoppingCart, FaAlignJustify, FaMixer, FaOpencart } from "react-icons/fa"
 
 const Navbar = () => {
+    const { session } = useContext(SessionContext)
     const [display, setDisplay] = useState(false)
     const [cartTotal, setCartTotal] = useState(0)
     const { cart } = useContext(CartContext)
@@ -33,7 +35,11 @@ const Navbar = () => {
                     </ul>
                     <ul className="nav-desktop">
                         <li>
-                            <Link to="/login">Login</Link>
+                            {
+                                !session
+                                    ? <Link to="/login">Login</Link>
+                                    : <Link to="/account">Account</Link>
+                            }
                         </li>
                         <li>
                             <Link className="nav-cart-container" to="/cart"><FaShoppingCart /><span className="nav-cart-txt">cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
