@@ -4,9 +4,11 @@ import CartContext from "../context/CartContext"
 import SessionContext from "../context/SessionContext"
 import { useContext, useEffect, useState } from "react"
 import { FaShoppingCart, FaAlignJustify, FaMixer, FaOpencart } from "react-icons/fa"
+import { supabase } from "../supabaseClient"
 
 const Navbar = () => {
     const { session } = useContext(SessionContext)
+    const [profile, setProfile] = useState([])
     const [display, setDisplay] = useState(false)
     const [cartTotal, setCartTotal] = useState(0)
     const { cart } = useContext(CartContext)
@@ -15,6 +17,16 @@ const Navbar = () => {
         const qty = cart.reduce((acc, cur) => acc + cur.qty, 0)
         setCartTotal(qty)
     }, [cart])
+
+    useEffect(() => {
+        const getProfile = async () => {
+            const { data, error } = await supabase.from("profiles").select("*").eq("id", session?.user?.id)
+            if (error) console.log(error)
+            setProfile(...data)
+        }
+
+        session && getProfile()
+    }, [session])
 
     return (
         <header>
@@ -38,7 +50,7 @@ const Navbar = () => {
                             {
                                 !session
                                     ? <Link to="/login">Login</Link>
-                                    : <Link to="/account">Account</Link>
+                                    : <Link to="/account">{profile.username}</Link>
                             }
                         </li>
                         <li>

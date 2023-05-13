@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import CartContext from "../context/CartContext"
 import ItemList from "../component/ItemList"
 import { toast } from "react-toastify"
+import { supabase } from "../supabaseClient"
 
 const Cart = () => {
     const { cart, setCart, wishList, setWishList } = useContext(CartContext)
@@ -12,34 +13,44 @@ const Cart = () => {
         setTotalPrice(subtotal)
     }, [cart])
 
-    const deleteCartItem = (id) => {
+    const deleteCartItem = async (id) => {
         const filterCart = cart?.filter(cartItem => cartItem.id !== id)
         setCart(filterCart)
+        const { error } = await supabase.from("cart").delete().eq("id", id)
+        if (error) console.log(error)
     }
 
-    const deleteWishItem = (id) => {
+    const deleteWishItem = async (id) => {
         const filterCart = wishList?.filter(cartItem => cartItem.id !== id)
         setWishList(filterCart)
+        const { error } = await supabase.from("wishlist").delete().eq("id", id)
+        if (error) console.log(error)
     }
 
-    const reduceQty = (id) => {
+    const reduceQty = async (id) => {
         const cartProduct = cart?.filter(cartItem => cartItem.id === id)[0]
         if (cartProduct.qty > 1 && cartProduct.qty <= 10) {
             cartProduct.qty--
             const newCart = [...cart]
             setCart(newCart)
+            const { error } = await supabase.from("cart").update({ qty: cartProduct.qty }).eq("id", id)
+            if (error) console.log(error)
         } else {
             const filterCart = cart?.filter(cartItem => cartItem.id !== id)
             setCart(filterCart)
+            const { error } = await supabase.from("cart").delete().eq("id", id)
+            if (error) console.log(error)
         }
     }
 
-    const addQty = (id) => {
+    const addQty = async (id) => {
         const cartProduct = cart?.filter(cartItem => cartItem.id === id)[0]
         if (cartProduct.qty >= 1 && cartProduct.qty < 10) {
             cartProduct.qty++;
             const newCart = [...cart]
             setCart(newCart)
+            const { error } = await supabase.from("cart").update({ qty: cartProduct.qty }).eq("id", id)
+            if (error) console.log(error)
         } else {
             toast.error('Limit reached for this product!', {
                 position: "top-right",
@@ -54,7 +65,7 @@ const Cart = () => {
         }
     }
 
-    const addToWishList = (id) => {
+    const addToWishList = async (id) => {
         const filterWishList = cart?.filter(cartItem => cartItem.id === id)[0];
         if (wishList?.some(item => item.id === filterWishList.id)) {
             toast.error('Product already exists in your Wishlist!', {
@@ -71,10 +82,14 @@ const Cart = () => {
             setWishList([...wishList, filterWishList])
             const filterCart = cart?.filter(cartItem => cartItem.id !== id)
             setCart(filterCart)
+            const { err } = await supabase.from("wishlist").insert([filterWishList]).eq("id", id)
+            if (err) console.log(err)
+            const { error } = await supabase.from("cart").delete().eq("id", id)
+            if (error) console.log(error)
         }
     }
 
-    const returnToCart = (id) => {
+    const returnToCart = async (id) => {
         const filterCart = wishList?.filter(cartItem => cartItem.id === id)[0];
         if (cart?.some(item => item.id === filterCart.id)) {
             toast.error('Product already exists in your Cart!', {
@@ -91,6 +106,10 @@ const Cart = () => {
             setCart([...cart, filterCart])
             const filterWishList = wishList?.filter(cartItem => cartItem.id !== id)
             setWishList(filterWishList)
+            const { err } = await supabase.from("cart").insert([filterCart]).eq("id", id)
+            if (err) console.log(err)
+            const { error } = await supabase.from("wishlist").delete().eq("id", id)
+            if (error) console.log(error)
         }
     }
 

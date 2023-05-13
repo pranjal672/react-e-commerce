@@ -1,0 +1,31 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.dashboard-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.dashboard-element {
+  border-top-right-radius: 1rem;
+  width: 10rem;
+  aspect-ratio: 1 / 1;
+  box-shadow: -5px 2px 5px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-element a {
+  text-decoration: none;
+  color: black;
+}
+
+.profile-div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

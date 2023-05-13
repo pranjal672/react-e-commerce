@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import useNavigateSearch from "../hooks/useNavigateSearch";
 import { Link } from "react-router-dom";
@@ -6,6 +6,8 @@ import { supabase } from "../supabaseClient";
 
 
 const Search = () => {
+    const divRef = useRef(null)
+    const [showDiv, setShowDiv] = useState(false);
     const [searchText, setSearchText] = useState("")
     const [products, setProducts] = useState([])
     const navigateSearch = useNavigateSearch()
@@ -28,6 +30,23 @@ const Search = () => {
         getProductData()
     }, [])
 
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (divRef.current && !divRef.current.contains(event.target)) {
+                setShowDiv(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [divRef])
+
+    useEffect(() => {
+        if (searchText.length > 0) setShowDiv(true)
+    }, [searchText])
+
     const searchProduct = (e) => {
         e.preventDefault()
         navigateSearch("/search", { s: searchText })
@@ -41,7 +60,7 @@ const Search = () => {
                 <button onClick={searchProduct}>
                     <FaSearch />
                 </button>
-                <div className="search-container">
+                {showDiv && <div ref={divRef} className="search-container">
                     {
                         products?.filter((product) => {
                             return searchText && product.title.toLowerCase().includes(searchText.toLowerCase())
@@ -50,7 +69,7 @@ const Search = () => {
                                 {product.title}
                             </Link>)
                     }
-                </div>
+                </div>}
             </form>
         </div >
     )

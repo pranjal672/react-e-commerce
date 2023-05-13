@@ -37,6 +37,10 @@
   color: white;
 }
 
+.full-width {
+  width: 100%;
+}
+
 .gold {
   color: gold;
 }
@@ -61,4 +65,10 @@
   color: white;
   border-radius: 50%;
   border: 2px solid red;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

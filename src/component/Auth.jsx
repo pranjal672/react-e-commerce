@@ -68,12 +68,12 @@ export default function Auth() {
                         />
                     </div>
                     <div>
-                        <button className="btn" disabled={loading}>
+                        <button className="btn full-width" disabled={loading}>
                             {loading ? <span>Loading</span> : <span>Send magic link</span>}
                         </button>
                     </div>
                 </form>
-                <button className="btn" onClick={() => loginFakeUser()}>
+                <button className="btn full-width" onClick={() => loginFakeUser()}>
                     <span>Guest Login</span>
                 </button>
             </div>

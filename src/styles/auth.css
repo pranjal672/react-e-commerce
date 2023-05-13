@@ -1,23 +1,20 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-container {
-  box-shadow: 0px 0px 10px black;
-  border: 1px solid black;
-  min-height: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 2rem;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .form-container h1 {
   align-self: center;
-}
-
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .form-widget {
@@ -26,11 +23,17 @@
   justify-content: center;
   align-items: flex-start;
   gap: 2rem;
+  width: 100%;
+}
+
+.form-widget > div {
+  width: 100%;
 }
 
 .inputField {
+  width: 100%;
   border-radius: 0.6rem;
-  padding: 1em;
+  padding: 1.5em;
   outline: 1px solid black;
   border: none;
   background: none;
