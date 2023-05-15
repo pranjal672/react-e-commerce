@@ -32,17 +32,21 @@ const Navbar = () => {
         <header>
             <div className="container">
                 <nav>
-                    <Link to="/" className="nav-logo"><FaOpencart className="logo" /><span className="logo-text">shop</span></Link>
+                    <Link to="/" className="nav-logo"><FaOpencart /><span className="nav-logo-txt">Shopcart</span></Link>
                     <Search />
                     <button onClick={() => setDisplay(prev => !prev)} className="nav-btn">
                         {!display ? <FaAlignJustify /> : <FaMixer />}
                     </button>
                     <ul data-visible={display ? "true" : "false"} className="nav-mobile">
                         <li>
-                            <Link to="/login">Login</Link>
+                            {
+                                !session
+                                    ? <Link to="/login" onClick={() => setDisplay(prev => !prev)}>Login</Link>
+                                    : <Link to="/account" onClick={() => setDisplay(prev => !prev)}>{profile.username}</Link>
+                            }
                         </li>
                         <li>
-                            <Link className="nav-cart-container" to="/cart"><FaShoppingCart /><span className="nav-cart-txt">cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
+                            <Link className="nav-cart" to="/cart" onClick={() => setDisplay(prev => !prev)}><FaShoppingCart /><span>Cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
                         </li>
                     </ul>
                     <ul className="nav-desktop">
@@ -54,7 +58,7 @@ const Navbar = () => {
                             }
                         </li>
                         <li>
-                            <Link className="nav-cart-container" to="/cart"><FaShoppingCart /><span className="nav-cart-txt">cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
+                            <Link className="nav-cart" to="/cart"><FaShoppingCart /><span>Cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
                         </li>
                     </ul>
                 </nav>

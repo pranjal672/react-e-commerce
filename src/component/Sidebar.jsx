@@ -54,13 +54,13 @@ const Sidebar = () => {
                     <ul className="filters">
                         {filters.map((filter) => (
                             <li key={++id}>
-                                <button className={filterList.includes(filter) ? "btn btn-active" : "btn"} onClick={() => createFilterList(filter)}>{filter}</button>
+                                <button className={filterList.includes(filter) ? "alt-btn btn btn-active" : "alt-btn btn"} onClick={() => createFilterList(filter)}>{filter}</button>
                             </li>
                         ))}
                     </ul>
                 </section>
                 <div>
-                    <button onClick={() => setDisplay(prev => !prev)} className="btn btn-active applybtn">
+                    <button onClick={() => setDisplay(prev => !prev)} className="btn applybtn full-width">
                         Apply
                     </button>
                 </div>

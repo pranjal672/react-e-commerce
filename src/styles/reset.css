@@ -11,14 +11,17 @@ ul {
   list-style: none;
 }
 
-img {
+img,
+svg {
   max-width: 100%;
-  height: auto;
+  display: block;
 }
 
-button {
+button,
+input {
   font-size: inherit;
   border: none;
+  background: none;
 }
 
 button:hover,

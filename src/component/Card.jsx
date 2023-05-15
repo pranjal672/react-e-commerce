@@ -16,7 +16,7 @@ const Card = ({ item }) => {
             <div className="card-content">
                 <Link to={`/products/${item.id}`}><h3 className="cutoff-text">{item.title}</h3></Link>
                 <p><span>&#8377;</span>{item.price}</p>
-                <p>
+                <p className="rating-container">
                     <span>
                         {count > 1 ? <FaStar className="gold" /> : count > 0.5 ? <FaStarHalfAlt className="gold" /> : <FaRegStar />}
                     </span>

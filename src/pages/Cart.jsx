@@ -3,14 +3,31 @@ import CartContext from "../context/CartContext"
 import ItemList from "../component/ItemList"
 import { toast } from "react-toastify"
 import { supabase } from "../supabaseClient"
+import SessionContext from "../context/SessionContext"
 
 const Cart = () => {
+    const { session } = useContext(SessionContext)
     const { cart, setCart, wishList, setWishList } = useContext(CartContext)
     const [totalPrice, setTotalPrice] = useState(0)
 
     useEffect(() => {
+        const getCartData = async () => {
+            const { data, error } = await supabase.from("cart").select("*").eq("user_id", session?.user.id)
+            if (error) console.error(error)
+            setCart(data)
+        }
+        const getWishData = async () => {
+            const { data, error } = await supabase.from("wishlist").select("*").eq("user_id", session?.user.id)
+            if (error) console.error(error)
+            setWishList(data)
+        }
+        session && getWishData()
+        session && getCartData()
+    }, [session])
+
+    useEffect(() => {
         const subtotal = cart?.reduce((acc, cur) => acc + Number(cur.price) * Number(cur.qty), 0)
-        setTotalPrice(subtotal)
+        setTotalPrice(Number.parseFloat(subtotal).toFixed(2))
     }, [cart])
 
     const deleteCartItem = async (id) => {
@@ -116,32 +133,36 @@ const Cart = () => {
     return (
         <main>
             <div className="container">
-                <section className="cart-main mb">
-                    <div className="cart-list">
-                        <h1>Shoping Cart</h1>
-                        {cart.length > 0
-                            ? <ItemList items={cart} deleteItem={deleteCartItem} moveList={addToWishList} isCart reduce={reduceQty} add={addQty} />
-                            : <p>Cart Empty!</p>
-                        }
+                <section className="cart-container">
+                    <div className="cart-main-container">
+                        <section className="cart-main mb">
+                            <div className="cart-list">
+                                <h2>Shoping Cart</h2>
+                                <div className="cart">
+                                    {cart.length > 0
+                                        ? <ItemList items={cart} deleteItem={deleteCartItem} moveList={addToWishList} isCart reduce={reduceQty} add={addQty} />
+                                        : <p>Cart Empty!</p>
+                                    }
+                                </div>
+                            </div>
+                        </section>
+                        <hr />
+                        <section className="cart-main mt">
+                            <div className="cart-list">
+                                <h2>Wishlist</h2>
+                                <div className="cart">
+                                    {wishList.length > 0
+                                        ? <ItemList items={wishList} deleteItem={deleteWishItem} moveList={returnToCart} />
+                                        : <p>No items saved for later!</p>
+                                    }
+                                </div>
+                            </div>
+                        </section>
                     </div>
                     <div className="cart-subtotal">
-                        <div>
-                            <h2>Sub Total</h2>
-                            <p>$ {totalPrice}</p>
-                        </div>
-                        <p>
-                            <button className="btn">PAY NOW</button>
-                        </p>
-                    </div>
-                </section>
-                <hr />
-                <section className="cart-main mt">
-                    <div className="cart-list">
-                        <h1>Wishlist</h1>
-                        {wishList.length > 0
-                            ? <ItemList items={wishList} deleteItem={deleteWishItem} moveList={returnToCart} />
-                            : <p>No items saved for later!</p>
-                        }
+                        <h2>Sub Total</h2>
+                        <p><span>&#8377;</span>{totalPrice}</p>
+                        <button className="btn">PAY NOW</button>
                     </div>
                 </section>
             </div>
