@@ -117,7 +117,7 @@
   .sidebar {
     position: fixed;
     inset: 0 1rem 0 0;
-    background-color: var(--BGCOLOR);
+    background-color: var(--NAV_BGCOLOR);
     padding: 1.5rem 2rem 0;
     color: var(--NAV_COLOR);
     transform: translateX(-100%);

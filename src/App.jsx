@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((_event, session) => {
-      if (_event == "SIGNED_IN") {
+      if (_event === "SIGNED_IN") {
         const getCartData = async () => {
           const { data, error } = await supabase.from("cart").select("*").eq("user_id", session?.user.id)
           if (error) console.error(error)

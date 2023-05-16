@@ -11,7 +11,7 @@ const Navbar = () => {
     const [profile, setProfile] = useState([])
     const [display, setDisplay] = useState(false)
     const [cartTotal, setCartTotal] = useState(0)
-    const { cart } = useContext(CartContext)
+    const { cart, setCart, setWishList } = useContext(CartContext)
 
     useEffect(() => {
         const qty = cart.reduce((acc, cur) => acc + cur.qty, 0)
@@ -24,43 +24,45 @@ const Navbar = () => {
             if (error) console.log(error)
             setProfile(...data)
         }
-
+        const getCartData = async () => {
+            const { data, error } = await supabase.from("cart").select("*").eq("user_id", session?.user.id)
+            if (error) console.error(error)
+            setCart(data)
+        }
+        const getWishData = async () => {
+            const { data, error } = await supabase.from("wishlist").select("*").eq("user_id", session?.user.id)
+            if (error) console.error(error)
+            setWishList(data)
+        }
         session && getProfile()
+        session && getWishData()
+        session && getCartData()
     }, [session])
 
     return (
         <header>
             <div className="container">
                 <nav>
-                    <Link to="/" className="nav-logo"><FaOpencart /><span className="nav-logo-txt">Shopcart</span></Link>
+                    <Link to="/" className="nav-logo"><FaOpencart /><span>Shopcart</span></Link>
+
                     <Search />
+
+                    <Link className="nav-cart" to="/cart" onClick={() => setDisplay(prev => !prev)}><FaShoppingCart /><span className="nav-logo-txt">Cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
+
+                    <ul data-visible={display ? "true" : "false"} className="nav-mobile">
+                        <li>{!session && <Link to="/login">Login</Link>}
+                        </li>
+                        <li><Link to="/account">Account</Link></li>
+                    </ul>
+                    <ul className="nav-desktop">
+                        <li>{!session && <Link to="/login">Login</Link>}
+                        </li>
+                        <li><Link to="/account">Account</Link></li>
+                    </ul>
+
                     <button onClick={() => setDisplay(prev => !prev)} className="nav-btn">
                         {!display ? <FaAlignJustify /> : <FaMixer />}
                     </button>
-                    <ul data-visible={display ? "true" : "false"} className="nav-mobile">
-                        <li>
-                            {
-                                !session
-                                    ? <Link to="/login" onClick={() => setDisplay(prev => !prev)}>Login</Link>
-                                    : <Link to="/account" onClick={() => setDisplay(prev => !prev)}>{profile.username}</Link>
-                            }
-                        </li>
-                        <li>
-                            <Link className="nav-cart" to="/cart" onClick={() => setDisplay(prev => !prev)}><FaShoppingCart /><span>Cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
-                        </li>
-                    </ul>
-                    <ul className="nav-desktop">
-                        <li>
-                            {
-                                !session
-                                    ? <Link to="/login">Login</Link>
-                                    : <Link to="/account">{profile.username}</Link>
-                            }
-                        </li>
-                        <li>
-                            <Link className="nav-cart" to="/cart"><FaShoppingCart /><span>Cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
-                        </li>
-                    </ul>
                 </nav>
             </div>
         </header >

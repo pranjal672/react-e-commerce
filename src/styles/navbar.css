@@ -1,6 +1,5 @@
 nav {
   padding: 1rem;
-  border-radius: 1.5rem;
   background-color: var(--NAV_BGCOLOR);
   color: var(--NAV_COLOR);
   display: flex;
@@ -109,14 +108,33 @@ nav a {
     display: none;
   }
 
+  .nav-search-container {
+    position: fixed;
+    top: 1rem;
+    left: 1.2rem;
+    width: 100%;
+  }
+
   nav {
-    justify-content: flex-start;
-    gap: 2rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .search-container {
+    width: 90%;
+    top: 2.4rem;
+    left: 1rem;
+  }
+
+  .nav-search {
+    width: 90%;
   }
 
   .nav-mobile {
     padding: 0;
-    background-color: var(--BGCOLOR);
+    background-color: var(--NAV_BGCOLOR);
     color: var(--NAV_COLOR);
     position: fixed;
     inset: 0 0 0 1rem;
@@ -143,9 +161,6 @@ nav a {
     z-index: 2;
     color: white;
     display: block;
-    position: fixed;
-    top: 2.4rem;
-    right: 2rem;
     width: 1.5rem;
     aspect-ratio: 1;
   }

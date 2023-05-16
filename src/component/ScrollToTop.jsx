@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { FaAngleUp } from 'react-icons/fa'
 
 const ScrollToTop = () => {
     const [scrollToTopButton, setScrollToTopButton] = useState(false)
@@ -23,7 +24,7 @@ const ScrollToTop = () => {
     return (
         <>
             {scrollToTopButton && (
-                <button onClick={scrollUp} className="scrolltotop">^</button>
+                <button onClick={scrollUp} className="scrolltotop"><FaAngleUp /></button>
             )}
         </>
     )
