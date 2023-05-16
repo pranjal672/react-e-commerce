@@ -1,8 +1,16 @@
-import { supabase } from "../supabaseClient"
-import { useNavigate, Link } from "react-router-dom"
+import { useContext, useEffect } from "react";
+import { supabase } from "../supabaseClient";
+import { useNavigate, Link } from "react-router-dom";
+import SessionContext from "../context/SessionContext";
 
 const Account = () => {
     const navigate = useNavigate()
+
+    const { session } = useContext(SessionContext)
+
+    useEffect(() => {
+        !session && navigate("/login")
+    }, [])
 
     const logOut = () => {
         supabase.auth.signOut()

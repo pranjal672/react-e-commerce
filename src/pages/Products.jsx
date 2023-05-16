@@ -8,21 +8,11 @@ import SessionContext from "../context/SessionContext"
 const Products = () => {
     const navigate = useNavigate()
     const { session } = useContext(SessionContext)
-    // const { dataCart, localCart, setDataCart, setLocalCart } = useContext(CartContext)
     const { cart, setCart } = useContext(CartContext)
     const [product, setProduct] = useState({})
     const productId = useParams()
 
     useEffect(() => {
-        // const getProduct = async () => {
-        //     try {
-        //         const response = await fetch(`https://fakestoreapi.com/products/${productId.id}`)
-        //         const data = await response.json()
-        //         setProduct(data)
-        //     } catch (err) {
-        //         console.log(err)
-        //     }
-        // }
         const getProduct = async () => {
             const { data, error } = await supabase.from("products").select("*").eq("id", productId.id)
             if (error) console.log(error)
@@ -68,13 +58,6 @@ const Products = () => {
                     theme: "light",
                 });
                 navigate("/login")
-                // setCart([...cart, cartDetail])
-                // if (localStorage.getItem('cart')) {
-                //     const oldCartItems = JSON.parse(localStorage.getItem('cart'));
-                //     localStorage.setItem('cart', JSON.stringify([...oldCartItems, cartDetail]))
-                // } else {
-                //     localStorage.setItem('cart', JSON.stringify([cartDetail]))
-                // }
             }
         }
     }

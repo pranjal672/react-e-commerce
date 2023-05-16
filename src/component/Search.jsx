@@ -13,15 +13,6 @@ const Search = () => {
     const navigateSearch = useNavigateSearch()
 
     useEffect(() => {
-        // const getProducts = async () => {
-        //     try {
-        //         const response = await fetch("https://fakestoreapi.com/products")
-        //         const data = await response.json()
-        //         setProducts(data)
-        //     } catch (e) {
-        //         console.log(e)
-        //     }
-        // }
         const getProductData = async () => {
             const { data, error } = await supabase.from("products").select("*")
             if (error) console.log(error)

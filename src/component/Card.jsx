@@ -3,7 +3,6 @@ import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa"
 
 const Card = ({ item }) => {
 
-    // const count = item?.rating?.rate
     const count = item.reviewRating
 
     return (
