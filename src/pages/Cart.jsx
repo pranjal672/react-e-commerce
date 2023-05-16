@@ -3,27 +3,10 @@ import CartContext from "../context/CartContext"
 import ItemList from "../component/ItemList"
 import { toast } from "react-toastify"
 import { supabase } from "../supabaseClient"
-import SessionContext from "../context/SessionContext"
 
 const Cart = () => {
-    const { session } = useContext(SessionContext)
     const { cart, setCart, wishList, setWishList } = useContext(CartContext)
     const [totalPrice, setTotalPrice] = useState(0)
-
-    useEffect(() => {
-        const getCartData = async () => {
-            const { data, error } = await supabase.from("cart").select("*").eq("user_id", session?.user.id)
-            if (error) console.error(error)
-            setCart(data)
-        }
-        const getWishData = async () => {
-            const { data, error } = await supabase.from("wishlist").select("*").eq("user_id", session?.user.id)
-            if (error) console.error(error)
-            setWishList(data)
-        }
-        session && getWishData()
-        session && getCartData()
-    }, [session])
 
     useEffect(() => {
         const subtotal = cart?.reduce((acc, cur) => acc + Number(cur.price) * Number(cur.qty), 0)
