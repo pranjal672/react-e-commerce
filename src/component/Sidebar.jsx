@@ -37,6 +37,8 @@ const Sidebar = () => {
         setGlobalFilter(filterList)
     }, [filterList])
 
+
+
     return (
         <>
             <button onClick={() => setDisplay(prev => !prev)} className="filter-btn">

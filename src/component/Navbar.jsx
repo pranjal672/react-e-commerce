@@ -39,6 +39,12 @@ const Navbar = () => {
         session && getCartData()
     }, [session])
 
+    const logOut = () => {
+        setDisplay(prev => !prev)
+        supabase.auth.signOut()
+        navigate("/")
+    }
+
     return (
         <header>
             <div className="container">
@@ -47,22 +53,28 @@ const Navbar = () => {
 
                     <Search />
 
-                    <Link className="nav-cart" to="/cart" onClick={() => setDisplay(prev => !prev)}><FaShoppingCart /><span className="nav-logo-txt">Cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
+                    <div className="flex">
+                        <Link className="nav-cart" to="/cart"><FaShoppingCart /><span className="nav-logo-txt">Cart</span><span className="nav-cart-num">{cartTotal}</span></Link>
+
+                        <button onClick={() => setDisplay(prev => !prev)} className="nav-btn">
+                            {!display ? <FaAlignJustify /> : <FaMixer />}
+                        </button>
+                    </div>
 
                     <ul data-visible={display ? "true" : "false"} className="nav-mobile">
-                        <li>{!session && <Link to="/login">Login</Link>}
+                        <li><Link to="/account" onClick={() => setDisplay(prev => !prev)}>Account</Link></li>
+                        <li>{!session && <Link to="/login" onClick={() => setDisplay(prev => !prev)}>Login</Link>}
                         </li>
-                        <li><Link to="/account">Account</Link></li>
+                        <li>{session && <button style={{ color: "white", fontWeight: "bold", fontFamily: "'Poppins', sans-serif" }} onClick={() => logOut()}>Logout</button>}
+                        </li>
                     </ul>
                     <ul className="nav-desktop">
+                        <li><Link to="/account">Account</Link></li>
                         <li>{!session && <Link to="/login">Login</Link>}
                         </li>
-                        <li><Link to="/account">Account</Link></li>
+                        <li>{session && <button style={{ color: "white", fontWeight: "bold", fontFamily: "'Poppins', sans-serif" }} onClick={() => logOut()}>Logout</button>}
+                        </li>
                     </ul>
-
-                    <button onClick={() => setDisplay(prev => !prev)} className="nav-btn">
-                        {!display ? <FaAlignJustify /> : <FaMixer />}
-                    </button>
                 </nav>
             </div>
         </header >

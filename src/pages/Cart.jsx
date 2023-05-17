@@ -1,12 +1,24 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import CartContext from "../context/CartContext"
 import ItemList from "../component/ItemList"
 import { toast } from "react-toastify"
 import { supabase } from "../supabaseClient"
+import { useLocation } from "react-router-dom"
 
 const Cart = () => {
+    const location = useLocation()
+    const wishlistRef = useRef(null)
+
     const { cart, setCart, wishList, setWishList } = useContext(CartContext)
     const [totalPrice, setTotalPrice] = useState(0)
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const shouldFocus = searchParams.get('focus');
+        if (shouldFocus) {
+            wishlistRef.current.focus();
+        }
+    }, [location])
 
     useEffect(() => {
         const subtotal = cart?.reduce((acc, cur) => acc + Number(cur.price) * Number(cur.qty), 0)
@@ -131,7 +143,7 @@ const Cart = () => {
                         </section>
                         <hr />
                         <section className="cart-main mt">
-                            <div className="cart-list">
+                            <div ref={wishlistRef} tabIndex={-1} autoFocus className="cart-list">
                                 <h2>Wishlist</h2>
                                 <div className="cart">
                                     {wishList.length > 0

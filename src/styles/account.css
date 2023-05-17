@@ -6,26 +6,34 @@
 
 .dashboard-container {
   display: flex;
+  flex-direction: column;
   gap: 2rem;
 }
 
 .dashboard-element {
   outline: 1px solid black;
   width: 10rem;
-  aspect-ratio: 1 / 1;
   border-radius: 1.5rem;
-  color: gray;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
   padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 300ms ease-in-out;
+}
+
+.dashboard-element:hover,
+.dashboard-element:focus {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .dashboard-element a {
+  font-weight: bold;
   text-decoration: none;
   color: black;
+  font-family: "Poppins", sans-serif;
 }
 
 .profile-div {
@@ -35,8 +43,16 @@
 }
 
 @media (max-width: 768px) {
+  .dashboard {
+    gap: 2rem;
+  }
+
   .dashboard p,
   .dashboard h1 {
     align-self: center;
+  }
+
+  .dashboard-container {
+    align-items: center;
   }
 }
