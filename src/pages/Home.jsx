@@ -29,7 +29,7 @@ const Home = () => {
         } else {
             setFilteredProducts(products)
         }
-
+        setCurrentPage(1)
     }, [globalFilter])
 
     const indexOfLastPost = currentPage * postPerPage
