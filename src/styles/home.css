@@ -11,7 +11,8 @@
 }
 
 .filter-btn,
-.close-filter {
+.close-filter,
+.filter-btn-container {
   display: none;
 }
 
@@ -155,6 +156,15 @@
   .close-filter svg {
     height: 100%;
     width: 100%;
+  }
+
+  .filter-btn-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .filter-btn-container span {
+    font-weight: bold;
   }
 
   .filter-btn {

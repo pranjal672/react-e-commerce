@@ -41,9 +41,12 @@ const Sidebar = () => {
 
     return (
         <>
-            <button onClick={() => setDisplay(prev => !prev)} className="filter-btn">
-                <FaFilter />
-            </button>
+            <div className="filter-btn-container">
+                <button onClick={() => setDisplay(prev => !prev)} className="filter-btn">
+                    <FaFilter />
+                </button>
+                <span>Filter</span>
+            </div>
             <aside data-visible={display ? "true" : "false"} className="sidebar">
                 <div className="filter-header">
                     <h2>Filter by</h2>

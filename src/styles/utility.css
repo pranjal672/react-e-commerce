@@ -102,3 +102,30 @@
 .crumb a:focus {
   color: black;
 }
+
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.pagination li {
+  padding: 0.5rem;
+  width: 2rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.6rem;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination button {
+  text-align: center;
+  font-weight: bold;
+  color: gray;
+}

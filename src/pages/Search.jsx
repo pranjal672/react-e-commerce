@@ -1,24 +1,38 @@
-import { useSearchParams } from "react-router-dom"
-import { useState, useEffect } from "react"
-import Card from "../component/Card"
-import { supabase } from "../supabaseClient"
+import { useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Card from "../component/Card";
+import { supabase } from "../supabaseClient";
+import Pagination from "../component/Pagination";
 
 
 const Search = () => {
+    const [loading, setLoading] = useState(false)
     const [products, setProducts] = useState([])
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const s = searchParams.get("s")
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postPerPage] = useState(6)
+
     useEffect(() => {
+        setLoading(true)
         const getProductData = async () => {
             const { data, error } = await supabase.from("products").select("*")
             if (error) console.log(error)
-            setProducts(data)
+            const searchProducts = data?.filter(product => product.title.toLowerCase().includes(s.toLowerCase()))
+            setProducts(searchProducts)
+            setLoading(false)
         }
         getProductData()
-    }, [])
+    }, [s])
 
-    const filteredProduct = products?.filter(product => product.title.toLowerCase().includes(s.toLowerCase()))
+    const indexOfLastPost = currentPage * postPerPage
+    const indexOfFirstPost = indexOfLastPost - postPerPage
+    const currentProducts = products.slice(indexOfFirstPost, indexOfLastPost)
+
+    const paginate = (number) => {
+        setCurrentPage(number)
+    }
 
     return (
         <main>
@@ -27,12 +41,13 @@ const Search = () => {
                     <h1>Search Results</h1>
                     <div className="result-container">
                         {
-                            filteredProduct.length > 0
-                                ? filteredProduct.map(product => <Card item={product} key={product.id} />)
+                            loading ? <p>searching...</p> : products.length > 0
+                                ? currentProducts.map(product => <Card item={product} key={product.id} />)
                                 : <p>No product matches the search!</p>
                         }
                     </div>
                 </section>
+                <Pagination postPerPage={postPerPage} totalPost={products.length} paginate={paginate} />
             </div>
         </main>
     )

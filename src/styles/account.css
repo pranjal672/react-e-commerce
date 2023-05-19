@@ -1,13 +1,25 @@
 .dashboard {
   display: flex;
-  flex-direction: column;
-  gap: 3rem;
+  gap: 4rem;
+}
+
+.user-dashboard {
+  display: flex;
 }
 
 .dashboard-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+.profile-container {
+  flex: 1;
+}
+
+.dashboard-header {
+  font-weight: bold;
+  text-align: center;
 }
 
 .dashboard-element {

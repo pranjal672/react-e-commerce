@@ -1,38 +1,54 @@
-import { useContext, useEffect, useState } from "react"
-import Card from "../component/Card"
-import Sidebar from "../component/Sidebar"
-import FilterContext from "../context/FilterContext"
-import { supabase } from "../supabaseClient"
-
+import { useState, useEffect, useContext } from "react";
+import Sidebar from "../component/Sidebar";
+import { supabase } from "../supabaseClient";
+import Products from "../component/Products";
+import FilterContext from "../context/FilterContext";
+import Pagination from "../component/Pagination";
 
 const Home = () => {
     const { globalFilter } = useContext(FilterContext)
     const [products, setProducts] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postPerPage] = useState(6)
 
     useEffect(() => {
         const getProductData = async () => {
             const { data, error } = await supabase.from("products").select("*")
             if (error) console.log(error)
             setProducts(data)
+            setFilteredProducts(data)
         }
+
         getProductData()
     }, [])
+
+    useEffect(() => {
+        if (globalFilter.length > 0) {
+            const filter = products?.filter(product => globalFilter.includes(product.category))
+            setFilteredProducts(filter)
+        } else {
+            setFilteredProducts(products)
+        }
+
+    }, [globalFilter])
+
+    const indexOfLastPost = currentPage * postPerPage
+    const indexOfFirstPost = indexOfLastPost - postPerPage
+    const currentProducts = filteredProducts.slice(indexOfFirstPost, indexOfLastPost)
+
+    const paginate = (number) => {
+        setCurrentPage(number)
+    }
 
     return (
         <main>
             <div className="container">
                 <section className="hero">
                     <Sidebar />
-                    <section className="content">
-                        <h2>All Products</h2>
-                        <section className="products">
-                            {globalFilter.length > 0
-                                ? products?.filter(product => globalFilter.includes(product.category)).map(product => <Card item={product} key={product.id} />)
-                                : products?.map(product => <Card item={product} key={product.id} />)
-                            }
-                        </section>
-                    </section>
+                    <Products products={currentProducts} />
                 </section>
+                <Pagination postPerPage={postPerPage} totalPost={filteredProducts.length} paginate={paginate} />
             </div>
         </main>
     )

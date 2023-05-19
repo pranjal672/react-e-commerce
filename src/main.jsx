@@ -23,9 +23,10 @@ const router = createBrowserRouter(
       <Route exact path='/' element={<App />} />
 
       <Route path='login' element={<Login />} />
-      <Route path='account' element={<Account />} />
-      <Route path='profile' element={<Profile />} />
-      <Route path='orders' element={<Orders />} />
+      <Route path='account' element={<Account />} >
+        <Route path='profile' element={<Profile />} />
+        <Route path='orders' element={<Orders />} />
+      </Route>
 
       <Route path='products' loader={() => redirect("/")} />
       <Route path='products/:id' element={<Products />} />
