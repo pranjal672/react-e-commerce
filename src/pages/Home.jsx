@@ -30,6 +30,7 @@ const Home = () => {
             setFilteredProducts(products)
         }
         setCurrentPage(1)
+        window.scrollTo(0, 0)
     }, [globalFilter])
 
     const indexOfLastPost = currentPage * postPerPage
