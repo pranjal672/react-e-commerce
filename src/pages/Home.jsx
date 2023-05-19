@@ -19,7 +19,6 @@ const Home = () => {
             setProducts(data)
             setFilteredProducts(data)
         }
-
         getProductData()
     }, [])
 
@@ -39,6 +38,17 @@ const Home = () => {
 
     const paginate = (number) => {
         setCurrentPage(number)
+        window.scrollTo(0, 0)
+    }
+
+    const paginateUp = () => {
+        setCurrentPage(currentPage + 1)
+        window.scrollTo(0, 0)
+    }
+
+    const paginateDown = () => {
+        setCurrentPage(currentPage - 1)
+        window.scrollTo(0, 0)
     }
 
     return (
@@ -48,7 +58,7 @@ const Home = () => {
                     <Sidebar />
                     <Products products={currentProducts} />
                 </section>
-                <Pagination postPerPage={postPerPage} totalPost={filteredProducts.length} paginate={paginate} />
+                <Pagination postPerPage={postPerPage} totalPost={filteredProducts.length} paginate={paginate} currentPage={currentPage} paginateUp={paginateUp} paginateDown={paginateDown} />
             </div>
         </main>
     )

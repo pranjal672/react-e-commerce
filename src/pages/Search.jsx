@@ -32,6 +32,17 @@ const Search = () => {
 
     const paginate = (number) => {
         setCurrentPage(number)
+        window.scrollTo(0, 0)
+    }
+
+    const paginateUp = () => {
+        setCurrentPage(currentPage + 1)
+        window.scrollTo(0, 0)
+    }
+
+    const paginateDown = () => {
+        setCurrentPage(currentPage - 1)
+        window.scrollTo(0, 0)
     }
 
     return (
@@ -47,7 +58,7 @@ const Search = () => {
                         }
                     </div>
                 </section>
-                <Pagination postPerPage={postPerPage} totalPost={products.length} paginate={paginate} />
+                <Pagination postPerPage={postPerPage} totalPost={products.length} currentPage={currentPage} paginate={paginate} paginateUp={paginateUp} paginateDown={paginateDown} />
             </div>
         </main>
     )
