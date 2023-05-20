@@ -29,8 +29,7 @@
   transition: all 300ms ease-in-out;
   font-weight: bold;
   background-color: white;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow: var(--BOX_SHADOW_BTN);
 }
 
 .btn:hover {
@@ -117,8 +116,7 @@
   width: 2rem;
   aspect-ratio: 1 / 1;
   border-radius: 0.6rem;
-  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  box-shadow: var(--BOX_SHADOW_BTN);
   display: flex;
   justify-content: center;
   align-items: center;

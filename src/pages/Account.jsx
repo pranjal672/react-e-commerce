@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import SessionContext from "../context/SessionContext";
 import { supabase } from "../supabaseClient";
 
 const Account = () => {
-    const navigate = useNavigate()
     const [profile, setProfile] = useState([])
-
     const { session } = useContext(SessionContext)
 
     useEffect(() => {
@@ -19,23 +17,22 @@ const Account = () => {
         session && getProfile()
     }, [session])
 
-
     return (
         <main>
             <div className="container">
                 <div className="dashboard">
                     <div className="dashboard-container">
                         <div className="dashboard-header">
-                            <p>Hello {profile?.username}</p>
+                            <p><span>Welcome</span> <span>{profile?.username}</span></p>
                         </div>
                         <div className="dashboard-element">
-                            <p><Link to="/account/profile">Profile</Link></p>
+                            <p><Link to="/account/profile">My Profile</Link></p>
                         </div>
                         <div className="dashboard-element">
-                            <p><Link to="/account/orders">Orders</Link></p>
+                            <p><Link to="/account/orders">My Orders</Link></p>
                         </div>
                         <div className="dashboard-element">
-                            <p><Link to="/cart?focus=true">Wishlist</Link></p>
+                            <p><Link to="/cart?focus=true">My Wishlist</Link></p>
                         </div>
                     </div>
                     <div className="profile-container">
@@ -43,7 +40,6 @@ const Account = () => {
                     </div>
                 </div>
             </div>
-
         </main>
     )
 }
