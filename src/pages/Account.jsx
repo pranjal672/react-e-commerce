@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import SessionContext from "../context/SessionContext";
 import { supabase } from "../supabaseClient";
 
 const Account = () => {
+    const navigate = useNavigate()
     const [profile, setProfile] = useState([])
     const { session } = useContext(SessionContext)
 
@@ -15,6 +16,7 @@ const Account = () => {
         }
 
         session && getProfile()
+        !session && navigate("/login")
     }, [session])
 
     return (
