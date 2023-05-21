@@ -1,8 +1,7 @@
-import { useLocation, useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const BreadCrumb = () => {
-    const navigate = useNavigate()
     const location = useLocation()
     let currentLink = ""
 

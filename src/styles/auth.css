@@ -5,16 +5,18 @@
 }
 
 .form-container {
+  width: 25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 2rem;
   padding: 2rem;
+  box-shadow: var(--BOX_SHADOW_BTN);
 }
 
 .form-container h1 {
-  align-self: center;
+  align-self: flex-start;
 }
 
 .form-widget {

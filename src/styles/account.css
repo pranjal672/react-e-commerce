@@ -16,6 +16,12 @@
   box-shadow: var(--BOX_SHADOW_BTN);
 }
 
+.dashboard-element-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .profile-container {
   padding: 2rem 4rem;
   box-shadow: var(--BOX_SHADOW_BTN);
@@ -78,17 +84,42 @@
   cursor: not-allowed;
 }
 
+.profile-element span {
+  color: gray;
+}
+
 @media (max-width: 768px) {
   .dashboard {
-    gap: 2rem;
-  }
-
-  .dashboard p,
-  .dashboard h1 {
-    align-self: center;
+    flex-direction: column;
   }
 
   .dashboard-container {
-    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .dashboard-element-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .dashboard-element {
+    padding: 0.1rem;
+    max-width: 1rem;
+    min-width: 6rem;
+  }
+
+  .profile-container {
+    padding: 1rem;
+  }
+
+  .profile {
+    gap: 1rem;
+  }
+
+  .profile-element input {
+    padding: 0.5rem;
+    width: 100%;
   }
 }

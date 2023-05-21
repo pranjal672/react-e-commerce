@@ -12,6 +12,22 @@
   display: block;
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.center-txt {
+  text-align: center;
+  width: 100%;
+}
+
+.error-container {
+  padding: 1rem;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
 .cutoff-text {
   padding: 0;
   --max-lines: 1;

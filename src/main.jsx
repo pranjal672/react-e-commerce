@@ -19,20 +19,16 @@ import 'react-toastify/dist/ReactToastify.css';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />} >
-      <Route exact path='/' element={<App />} />
-
+      <Route index element={<App />} />
       <Route path='login' element={<Login />} />
       <Route path='account' element={<Account />}>
         <Route path='profile' element={<Profile />} />
         <Route path='orders' element={<Orders />} />
       </Route>
-
       <Route path='products' loader={() => redirect("/")} />
       <Route path='products/:id' element={<Products />} />
-
       <Route path='cart' element={<Cart />} />
       <Route path='search' element={<Search />} />
-
       <Route path='*' loader={() => redirect("/")} />
     </Route>
   )

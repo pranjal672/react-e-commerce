@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa"
 
 const Card = ({ item }) => {
-
     const count = item.reviewRating
 
     return (

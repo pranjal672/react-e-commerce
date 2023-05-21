@@ -9,10 +9,8 @@ export default function Auth() {
 
     const handleLogin = async (event) => {
         event.preventDefault()
-
         setLoading(true)
         const { error } = await supabase.auth.signInWithOtp({ email })
-
         if (error) {
             alert(error.error_description || error.message)
         } else {
@@ -22,40 +20,34 @@ export default function Auth() {
     }
 
     // const registerFakeUser = async () => {
-
     //     const { error } = await supabase.auth.signUp({
     //         email: 'sapod34321@andorem.com',
     //         password: 'lolfaketroll@123'
     //     })
-
     //     if (error) {
     //         alert(error.error_description || error.message)
     //     } else {
     //         alert('Check your email for the confirmation!')
     //     }
-
     // }
 
     const loginFakeUser = async () => {
-
         const { error } = await supabase.auth.signInWithPassword({
             email: 'sapod34321@andorem.com',
             password: 'lolfaketroll@123'
         })
-
         if (error) {
             alert(error.error_description || error.message)
         } else {
             navigate("/")
         }
-
     }
 
     return (
         <div className='login'>
             <div className="form-container">
                 <h1>Login</h1>
-                <p>Sign in via magic link with your email below</p>
+                <p className='bold'> Sign in with your email below</p>
                 <form className="form-widget" onSubmit={handleLogin}>
                     <div>
                         <input
@@ -69,13 +61,17 @@ export default function Auth() {
                     </div>
                     <div>
                         <button className="btn full-width" disabled={loading}>
-                            {loading ? <span>Loading</span> : <span>Send magic link</span>}
+                            {loading ? <span>Loading</span> : <span>Send link</span>}
                         </button>
                     </div>
                 </form>
+                <p className='bold center-txt'>or</p>
                 <button className="btn full-width" onClick={() => loginFakeUser()}>
                     <span>Guest Login</span>
                 </button>
+                <div className="error-container">
+                    <p>Guest login is a public account meant for testing purpose only.</p>
+                </div>
             </div>
         </div>
     )
