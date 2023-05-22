@@ -55,9 +55,7 @@ const Navbar = () => {
                     </div>
                     <ul data-visible={display ? "true" : "false"} className="nav-mobile">
                         <li><Link to="/account" onClick={() => setDisplay(prev => !prev)}>Account</Link></li>
-                        <li>{!session && <Link to="/login" onClick={() => setDisplay(prev => !prev)}>Login</Link>}
-                        </li>
-                        <li>{session && <button className="logout" onClick={() => logOut()}><RiLogoutCircleRLine /></button>}
+                        <li>{!session ? <Link to="/login" onClick={() => setDisplay(prev => !prev)}>Login</Link> : <button style={{ fontWeight: "bold", color: "white" }} onClick={() => logOut()}>Logout</button>}
                         </li>
                     </ul>
                     <ul className="nav-desktop">
