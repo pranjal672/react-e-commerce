@@ -7,7 +7,6 @@ const Sidebar = () => {
     const { setGlobalFilter } = useContext(FilterContext)
     const [filters] = useState(['electronics', 'jewelery', "men's clothing", "women's clothing"])
     const [filterList, setFilterList] = useState([])
-
     const [display, setDisplay] = useState(false)
 
     const createFilterList = (filter) => {
@@ -27,8 +26,6 @@ const Sidebar = () => {
     useEffect(() => {
         setGlobalFilter(filterList)
     }, [filterList])
-
-
 
     return (
         <>

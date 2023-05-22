@@ -7,16 +7,20 @@ import SessionContext from "../context/SessionContext"
 
 const Products = () => {
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
+    const [btnEnable, setBtnEnable] = useState(true)
     const { session } = useContext(SessionContext)
     const { cart, setCart } = useContext(CartContext)
     const [product, setProduct] = useState({})
     const productId = useParams()
 
     useEffect(() => {
+        setLoading(true)
         const getProduct = async () => {
             const { data, error } = await supabase.from("products").select("*").eq("id", productId.id)
             if (error) console.log(error)
             setProduct(data[0])
+            setLoading(false)
         }
         getProduct()
     }, [productId])
@@ -43,9 +47,11 @@ const Products = () => {
             });
         } else {
             if (!!session) {
+                setBtnEnable(false)
                 const { data, error } = await supabase.from("cart").insert([cartDetail]).select()
                 if (error) console.error(error)
                 setCart([...cart, data[0]])
+                setBtnEnable(true)
             } else {
                 toast.error('User not logged in!', {
                     position: "top-right",
@@ -65,24 +71,30 @@ const Products = () => {
     return (
         <main>
             <div className="container">
-                <section className="product">
-                    <aside>
-                        <img src={product?.image} alt="product_img" />
-                    </aside>
-                    <article>
-                        <div className="product-details">
-                            <p>{product?.category}</p>
-                            <h1>{product?.title}</h1>
-                            <p>{product?.description}</p>
-                            <div className="btn-container">
-                                <p><span>&#8377;</span>{product?.price}</p>
-                                <p>
-                                    <button onClick={() => addToCart(product)} className="btn">Add to cart</button>
-                                </p>
-                            </div>
-                        </div>
-                    </article>
-                </section>
+                {
+                    loading
+                        ? <p className="center bold">loading...</p>
+                        : <>
+                            <section className="product">
+                                <aside>
+                                    <img src={product?.image} alt="product_img" />
+                                </aside>
+                                <article>
+                                    <div className="product-details">
+                                        <p>{product?.category}</p>
+                                        <h1>{product?.title}</h1>
+                                        <p>{product?.description}</p>
+                                        <div className="btn-container">
+                                            <p><span>&#8377;</span>{product?.price}</p>
+                                            <p>
+                                                <button disabled={btnEnable ? false : true} onClick={() => addToCart(product)} className="btn">Add to cart</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </section>
+                        </>
+                }
             </div>
         </main>
     )

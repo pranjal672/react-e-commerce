@@ -1,6 +1,6 @@
 import { FaRegMinusSquare, FaPlusSquare } from "react-icons/fa";
 
-const ItemList = ({ items, deleteItem, moveList, isCart = false, reduce, add }) => {
+const ItemList = ({ items, deleteItem, moveList, isCart = false, reduce, add, loading }) => {
 
     return (
         <>
@@ -14,9 +14,9 @@ const ItemList = ({ items, deleteItem, moveList, isCart = false, reduce, add }) 
                         <div>
                             {isCart && <div className="item-qty">
                                 <p>Qty : </p>
-                                <button onClick={() => reduce(cartItem.id)}><FaRegMinusSquare /></button>
+                                <button disabled={loading ? true : false} onClick={() => reduce(cartItem.id)}><FaRegMinusSquare /></button>
                                 <input type="number" value={cartItem.qty} min={1} max={10} disabled />
-                                <button onClick={() => add(cartItem.id)}><FaPlusSquare /></button>
+                                <button disabled={loading ? true : false} onClick={() => add(cartItem.id)}><FaPlusSquare /></button>
                             </div>}
                             <p><button onClick={() => deleteItem(cartItem.id)} className="item-btn">delete</button></p>
                             {

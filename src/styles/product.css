@@ -49,6 +49,10 @@
   gap: 2rem;
 }
 
+.btn-container button:disabled {
+  cursor: not-allowed;
+}
+
 .btn-container p {
   font-size: 1.2em;
   font-weight: bold;

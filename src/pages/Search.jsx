@@ -47,17 +47,22 @@ const Search = () => {
     return (
         <main>
             <div className="container">
-                <section className="search-result">
-                    <h1>Search Results</h1>
-                    <div className="result-container">
-                        {
-                            loading ? <p>searching...</p> : products.length > 0
-                                ? currentProducts.map(product => <Card item={product} key={product.id} />)
-                                : <p>No product matches the search!</p>
-                        }
-                    </div>
-                </section>
-                <Pagination postPerPage={postPerPage} totalPost={products.length} currentPage={currentPage} paginate={paginate} paginateUp={paginateUp} paginateDown={paginateDown} />
+                {
+                    loading
+                        ? <p className="center bold">searching...</p>
+                        : <>
+                            <section className="search-result">
+                                <h1>Search Results</h1>
+                                <div className="result-container">
+                                    {products.length > 0
+                                        ? currentProducts.map(product => <Card item={product} key={product.id} />)
+                                        : <p>No product matches the search!</p>
+                                    }
+                                </div>
+                            </section>
+                            <Pagination postPerPage={postPerPage} totalPost={products.length} currentPage={currentPage} paginate={paginate} paginateUp={paginateUp} paginateDown={paginateDown} />
+                        </>
+                }
             </div>
         </main>
     )

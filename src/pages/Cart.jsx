@@ -3,14 +3,15 @@ import CartContext from "../context/CartContext"
 import ItemList from "../component/ItemList"
 import { toast } from "react-toastify"
 import { supabase } from "../supabaseClient"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const Cart = () => {
+    const navigate = useNavigate()
     const location = useLocation()
     const wishlistRef = useRef(null)
-
     const { cart, setCart, wishList, setWishList } = useContext(CartContext)
     const [totalPrice, setTotalPrice] = useState(0)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -40,6 +41,7 @@ const Cart = () => {
     }
 
     const reduceQty = async (id) => {
+        setLoading(true)
         const cartProduct = cart?.filter(cartItem => cartItem.id === id)[0]
         if (cartProduct.qty > 1 && cartProduct.qty <= 10) {
             cartProduct.qty--
@@ -53,9 +55,11 @@ const Cart = () => {
             const { error } = await supabase.from("cart").delete().eq("id", id)
             if (error) console.log(error)
         }
+        setLoading(false)
     }
 
     const addQty = async (id) => {
+        setLoading(true)
         const cartProduct = cart?.filter(cartItem => cartItem.id === id)[0]
         if (cartProduct.qty >= 1 && cartProduct.qty < 10) {
             cartProduct.qty++;
@@ -75,11 +79,12 @@ const Cart = () => {
                 theme: "light",
             });
         }
+        setLoading(false)
     }
 
     const addToWishList = async (id) => {
         const filterWishList = cart?.filter(cartItem => cartItem.id === id)[0];
-        if (wishList?.some(item => item.id === filterWishList.id)) {
+        if (wishList?.some(item => item.product_id === filterWishList.product_id)) {
             toast.error('Product already exists in your Wishlist!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -103,7 +108,7 @@ const Cart = () => {
 
     const returnToCart = async (id) => {
         const filterCart = wishList?.filter(cartItem => cartItem.id === id)[0];
-        if (cart?.some(item => item.id === filterCart.id)) {
+        if (cart?.some(item => item.product_id === filterCart.product_id)) {
             toast.error('Product already exists in your Cart!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -125,6 +130,23 @@ const Cart = () => {
         }
     }
 
+    const cartPurchase = () => {
+        if (cart?.length > 0) {
+            navigate("/checkout")
+        } else {
+            toast.error('Cart Empty!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+    }
+
     return (
         <main>
             <div className="container">
@@ -135,7 +157,7 @@ const Cart = () => {
                                 <h2>Shoping Cart</h2>
                                 <div className="cart">
                                     {cart.length > 0
-                                        ? <ItemList items={cart} deleteItem={deleteCartItem} moveList={addToWishList} isCart reduce={reduceQty} add={addQty} />
+                                        ? <ItemList items={cart} deleteItem={deleteCartItem} moveList={addToWishList} isCart reduce={reduceQty} add={addQty} loading={loading} />
                                         : <p>Cart Empty!</p>
                                     }
                                 </div>
@@ -157,7 +179,7 @@ const Cart = () => {
                     <div className="cart-subtotal">
                         <h2>Sub Total</h2>
                         <p><span>&#8377;</span>{totalPrice}</p>
-                        <button className="btn">PAY NOW</button>
+                        <button onClick={() => cartPurchase()} className="btn">Buy Now</button>
                     </div>
                 </section>
             </div>

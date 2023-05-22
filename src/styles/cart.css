@@ -117,6 +117,10 @@
   padding: 0.4rem;
 }
 
+.item-qty button:disabled {
+  cursor: not-allowed;
+}
+
 .item-qty input {
   max-width: 2rem;
   text-align: end;

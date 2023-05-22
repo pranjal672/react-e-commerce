@@ -6,6 +6,7 @@ import FilterContext from "../context/FilterContext";
 import Pagination from "../component/Pagination";
 
 const Home = () => {
+    const [loading, setLoading] = useState(false)
     const { globalFilter } = useContext(FilterContext)
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
@@ -13,11 +14,13 @@ const Home = () => {
     const [postPerPage] = useState(6)
 
     useEffect(() => {
+        setLoading(true)
         const getProductData = async () => {
             const { data, error } = await supabase.from("products").select("*")
             if (error) console.log(error)
             setProducts(data)
             setFilteredProducts(data)
+            setLoading(false)
         }
         getProductData()
     }, [])
@@ -55,11 +58,15 @@ const Home = () => {
     return (
         <main>
             <div className="container">
-                <section className="hero">
-                    <Sidebar />
-                    <Products products={currentProducts} />
-                </section>
-                <Pagination postPerPage={postPerPage} totalPost={filteredProducts.length} paginate={paginate} currentPage={currentPage} paginateUp={paginateUp} paginateDown={paginateDown} />
+                {!loading
+                    ? <>
+                        <section className="hero">
+                            <Sidebar />
+                            <Products products={currentProducts} />
+                        </section>
+                        <Pagination postPerPage={postPerPage} totalPost={filteredProducts.length} paginate={paginate} currentPage={currentPage} paginateUp={paginateUp} paginateDown={paginateDown} />
+                    </>
+                    : <p className="center bold">loading...</p>}
             </div>
         </main>
     )

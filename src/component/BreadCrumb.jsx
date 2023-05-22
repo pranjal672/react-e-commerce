@@ -14,7 +14,6 @@ const BreadCrumb = () => {
         </div>
     })
 
-
     return (
         <section className="breadcrumb">
             <div className="container">
