@@ -5,6 +5,7 @@ import SessionContext from "../context/SessionContext"
 import { useContext, useEffect, useState } from "react"
 import { FaShoppingCart, FaAlignJustify, FaMixer, FaOpencart } from "react-icons/fa"
 import { supabase } from "../supabaseClient"
+import { RiLogoutCircleRLine, RiLoginCircleLine } from "react-icons/ri"
 
 const Navbar = () => {
     const navigate = useNavigate()
@@ -56,14 +57,13 @@ const Navbar = () => {
                         <li><Link to="/account" onClick={() => setDisplay(prev => !prev)}>Account</Link></li>
                         <li>{!session && <Link to="/login" onClick={() => setDisplay(prev => !prev)}>Login</Link>}
                         </li>
-                        <li>{session && <button style={{ color: "white", fontWeight: "bold", fontFamily: "'Poppins', sans-serif" }} onClick={() => logOut()}>Logout</button>}
+                        <li>{session && <button className="logout" onClick={() => logOut()}><RiLogoutCircleRLine /></button>}
                         </li>
                     </ul>
                     <ul className="nav-desktop">
                         <li><Link to="/account">Account</Link></li>
-                        {!session && <li> <Link to="/login">Login</Link></li>}
-                        <li>{session && <button style={{ color: "white", fontWeight: "bold", fontFamily: "'Poppins', sans-serif" }} onClick={() => logOut()}>Logout</button>}
-                        </li>
+                        {!session ? <li data-tooltip="Login" className="logout"><Link to="/login"><RiLoginCircleLine /></Link></li> : <li data-tooltip="Logout" className="logout">{session && <button onClick={() => logOut()}><RiLogoutCircleRLine /></button>}
+                        </li>}
                     </ul>
                 </nav>
             </div>
