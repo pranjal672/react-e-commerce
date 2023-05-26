@@ -5,6 +5,7 @@ import { supabase } from '../supabaseClient'
 import CartContext from "../context/CartContext"
 
 const Checkout = () => {
+    const serverUrl = import.meta.env.VITE_SERVER_URL
     const navigate = useNavigate()
     const { session } = useContext(SessionContext)
     const { cart } = useContext(CartContext)
@@ -24,6 +25,22 @@ const Checkout = () => {
         const subtotal = cart?.reduce((acc, cur) => acc + Number(cur.price) * Number(cur.qty), 0)
         setTotalPrice(Number.parseFloat(subtotal).toFixed(2))
     }, [cart])
+
+    const checkout = async () => {
+        await fetch(serverUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ items: cart })
+        }).then(res => {
+            return res.json()
+        }).then(res => {
+            if (res.url) {
+                window.location.assign(res.url)
+            }
+        })
+    }
 
     return (
         <main>
@@ -57,23 +74,14 @@ const Checkout = () => {
                                 )}
                             </section>
                         </div>
-                        <div className="checkout-payment">
-                            <h3>Payment Mode</h3>
-                            <form className="payment-container">
-                                <div className="radio-btn">
-                                    <input type="radio" id="cod" name="payment_mode" value="cod" />
-                                    <label htmlFor="cod">Cash on Delivery</label>
-                                </div>
-                                <div>
-                                    <button className="btn">Place Order</button>
-                                </div>
-                            </form>
-                        </div>
                     </section>
                     <aside>
                         <h3>Sub Total</h3>
                         <div className="place-order">
                             <p className="price"><span>&#8377;</span>{totalPrice}</p>
+                            <div>
+                                <button onClick={checkout} className="btn">Pay Now</button>
+                            </div>
                         </div>
                     </aside>
                 </section>

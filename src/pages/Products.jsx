@@ -32,7 +32,8 @@ const Products = () => {
             title: product.title,
             qty: 1,
             user_id: session?.user.id,
-            product_id: product.id
+            product_id: product.id,
+            stripe_id: product.stripe_id
         }
         if (cart.length > 0 && cart.some((item) => item.product_id === product.id)) {
             toast.error('Product already in Cart!', {

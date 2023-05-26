@@ -56,9 +56,13 @@
   gap: 2rem;
 }
 
+.place-order button{
+  width: 100%;
+}
+
 .place-order .price {
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 .radio-btn {

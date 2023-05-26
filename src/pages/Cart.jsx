@@ -179,7 +179,7 @@ const Cart = () => {
                     <div className="cart-subtotal">
                         <h2>Sub Total</h2>
                         <p><span>&#8377;</span>{totalPrice}</p>
-                        <button onClick={() => cartPurchase()} className="btn">Buy Now</button>
+                        <button onClick={() => cartPurchase()} className="btn">Proceed to Checkout</button>
                     </div>
                 </section>
             </div>

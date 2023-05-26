@@ -16,6 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import { SessionProvider } from "./context/SessionContext";
 import 'react-toastify/dist/ReactToastify.css';
 import Checkout from './pages/Checkout';
+import Success from './pages/Success';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path='cart' element={<Cart />} />
       <Route path='search' element={<Search />} />
       <Route path='checkout' element={<Checkout />} />
+      <Route path='success' element={<Success />} />
       <Route path='*' loader={() => redirect("/")} />
     </Route>
   )
