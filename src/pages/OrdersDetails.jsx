@@ -34,11 +34,24 @@ const OrdersDetails = () => {
                 price: price,
                 qty: qty
             }
-            setOrderItems([...orderItems, newData])
+            return newData
         }
-        for (const order of orderDetails) {
-            getOrderItems(order.product_id, order.quantity, order.price)
+        const fetchOrderItems = async () => {
+            const updatedOrderItems = []
+            for (const order of orderDetails) {
+                const newData = await getOrderItems(order.product_id, order.quantity, order.price)
+                updatedOrderItems.push(newData)
+            }
+            setOrderItems([...orderItems, ...updatedOrderItems])
         }
+
+        const cleanup = () => {
+            setOrderItems([])
+        }
+
+        fetchOrderItems()
+
+        return cleanup;
     }, [orderDetails])
 
     useEffect(() => {
