@@ -94,6 +94,12 @@
   align-items: center;
 }
 
+.link {
+  font-weight: bold;
+  color: gray;
+  text-decoration: none;
+}
+
 .breadcrumb {
   margin-top: 2rem;
   padding: 1rem;
@@ -102,6 +108,7 @@
 .breadcrumb-container {
   display: flex;
   padding-left: 1rem;
+  align-items: center;
 }
 
 .crumb span {
@@ -111,6 +118,8 @@
 .crumb a {
   text-decoration: none;
   color: gray;
+  display: flex;
+  align-items: center;
 }
 
 .crumb a:hover,
