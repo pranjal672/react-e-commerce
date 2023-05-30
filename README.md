@@ -1,7 +1,5 @@
 # EStore [E-Commerce Store Website]
 
----
-
 The project is build using React.
 
 The project was created for learning purpose & future job application prospect.
