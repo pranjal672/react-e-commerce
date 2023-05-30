@@ -6,17 +6,17 @@ The project was created for learning purpose & future job application prospect.
 
 ### Technologies Used
 
----
-
 - React
 - Stripe
 - Supabase
 
-### Deployment
-
 ---
 
+### Deployment
+
 - [Vercel - frontend react app](https://react-e-commerce-omega.vercel.app/)
+
+---
 
 ### Future improvements
 
