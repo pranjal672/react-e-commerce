@@ -1,4 +1,4 @@
-# EStore [E-Commerce Store Website]
+# Shopcart [E-Commerce Store Website]
 
 The project is build using React.
 
