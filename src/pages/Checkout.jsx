@@ -11,6 +11,7 @@ const Checkout = () => {
     const { cart } = useContext(CartContext)
     const [address, setAddress] = useState("")
     const [totalPrice, setTotalPrice] = useState(0)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const getAddress = async () => {
@@ -27,19 +28,24 @@ const Checkout = () => {
     }, [cart])
 
     const checkout = async () => {
-        await fetch(serverUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ items: cart })
-        }).then(res => {
-            return res.json()
-        }).then(res => {
-            if (res.url) {
-                window.location.assign(res.url)
-            }
-        })
+        setLoading(true)
+        try {
+            const response = await fetch(serverUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ items: cart })
+            })
+            const result = await response.json()
+            if (result.url) {
+                window.location.assign(result.url)
+            } else throw new Error("Something went wrong try again")
+        } catch (err) {
+            console.error(err.message)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -80,7 +86,7 @@ const Checkout = () => {
                         <div className="place-order">
                             <p className="price"><span>&#8377;</span>{totalPrice}</p>
                             <div>
-                                <button onClick={checkout} className="btn">Pay Now</button>
+                                <button disabled={loading} onClick={checkout} className="btn">{loading ? "Processing Payment..." : "Pay Now"}</button>
                             </div>
                         </div>
                     </aside>

@@ -54,10 +54,6 @@ const OrdersDetails = () => {
         return cleanup;
     }, [orderDetails])
 
-    useEffect(() => {
-        console.log(orderItems)
-    }, [orderItems])
-
     return (
         <main>
             <div className="container">
